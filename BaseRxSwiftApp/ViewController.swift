@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import RxSwift
 
-class ViewController: UIViewController {
-
+class ViewController: BaseViewController {
+    let disbandBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

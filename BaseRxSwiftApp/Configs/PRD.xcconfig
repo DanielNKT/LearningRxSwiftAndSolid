@@ -1,0 +1,15 @@
+//
+//  PRD.xcconfig
+//  BaseRxSwiftApp
+//
+//  Created by Bé Gạo on 7/8/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+//Product config
+ENVIRONMENT = PRD
+API_BASE_URL = https:/$()/api.github.com
+APP_NAME = BaseRx(PRD)
+PRODUCT_BUNDLE_IDENTIFIER = com.nguyentoan.BaseRxSwiftApp
