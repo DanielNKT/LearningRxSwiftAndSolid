@@ -8,20 +8,17 @@ import RxSwift
 import RxCocoa
 
 class HomeViewModel: BaseViewModel {
-    
-    let items: Driver<Users>
+    var items: Driver<Users> { itemsRelay.asDriver() }
     
     private let itemsRelay = BehaviorRelay<[User]>(value: [])
-    private let loadSubject = PublishSubject<UserListRequest>()
+    private let usersSubject = PublishSubject<UserListRequest>()
+    
     private let useCases: UserUseCases
     private var since: Int = 0
     
     init(useCases: UserUseCases) {
         self.useCases = useCases
-        self.items = itemsRelay.asDriver()
-        
         super.init()
-        
         bind()
     }
     
@@ -29,11 +26,11 @@ class HomeViewModel: BaseViewModel {
         let params = UserListRequest()
         params.per_page = perPage
         params.since = self.since
-        loadSubject.onNext(params)
+        usersSubject.onNext(params)
     }
     
     private func bind() {
-        loadSubject
+        usersSubject
             .do(onNext: { [weak self] _ in self?.setLoading(true) })
             .flatMapLatest { [unowned self] params in
                 self.useCases.fetchUser

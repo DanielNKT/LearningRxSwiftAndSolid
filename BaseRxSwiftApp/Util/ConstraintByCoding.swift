@@ -59,9 +59,9 @@ extension UIView {
         case .full:
             NSLayoutConstraint.activate([
                 makeConstraint(from: self.topAnchor, to: view.safeAreaLayoutGuide.topAnchor, constant: constant, relation: relationContraint),
-                makeConstraint(from: self.bottomAnchor, to: view.safeAreaLayoutGuide.bottomAnchor, constant: constant, relation: relationContraint),
+                makeConstraint(from: self.bottomAnchor, to: view.safeAreaLayoutGuide.bottomAnchor, constant: -constant, relation: relationContraint),
                 makeConstraint(from: self.leadingAnchor, to: view.safeAreaLayoutGuide.leadingAnchor, constant: constant, relation: relationContraint),
-                makeConstraint(from: self.trailingAnchor, to: view.safeAreaLayoutGuide.trailingAnchor, constant: constant, relation: relationContraint)
+                makeConstraint(from: self.trailingAnchor, to: view.safeAreaLayoutGuide.trailingAnchor, constant: -constant, relation: relationContraint)
             ])
         case .fullCover:
             NSLayoutConstraint.activate([
@@ -94,7 +94,7 @@ extension UIView {
         case .leftBottom:
             NSLayoutConstraint.activate([
                 makeConstraint(from: self.leadingAnchor, to: view.safeAreaLayoutGuide.leadingAnchor, constant: constant, relation: relationContraint),
-                makeConstraint(from: self.bottomAnchor, to: view.safeAreaLayoutGuide.bottomAnchor, constant: constant, relation: relationContraint)
+                makeConstraint(from: self.bottomAnchor, to: view.safeAreaLayoutGuide.bottomAnchor, constant: -constant, relation: relationContraint)
             ])
         case .rightTop:
             NSLayoutConstraint.activate([
@@ -103,8 +103,8 @@ extension UIView {
             ])
         case .rightBottom:
             NSLayoutConstraint.activate([
-                makeConstraint(from: self.rightAnchor, to: view.safeAreaLayoutGuide.rightAnchor, constant: constant, relation: relationContraint),
-                makeConstraint(from: self.bottomAnchor, to: view.safeAreaLayoutGuide.bottomAnchor, constant: constant, relation: relationContraint)
+                makeConstraint(from: self.rightAnchor, to: view.safeAreaLayoutGuide.rightAnchor, constant: -constant, relation: relationContraint),
+                makeConstraint(from: self.bottomAnchor, to: view.safeAreaLayoutGuide.bottomAnchor, constant: -constant, relation: relationContraint)
             ])
         case .centerX:
             NSLayoutConstraint.activate([
@@ -199,7 +199,6 @@ extension UIView {
     }
     
     func constraintsTo(view: UIView, positions: [OptionsContraint], constant: Double = 0.0, relationContraint: RelationContraint = .equal) {
-        view.translatesAutoresizingMaskIntoConstraints = false
         positions.forEach {
             constraintsTo(view: view, position: $0, constant: constant, relationContraint: relationContraint)
         }

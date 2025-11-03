@@ -29,9 +29,10 @@ class BaseViewController: UIViewController, BaseType {
     
     func initUI() {
         view.backgroundColor = .white
-        view.addSubview(bg)
-        bg.constraintsTo(view: self.view, position: .fullCover)
-        bg.isHidden = backgroundImageHidden
+//        view.addSubview(bg)
+//        bg.constraintsTo(view: self.view, position: .fullCover)
+//        bg.isHidden = backgroundImageHidden
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     func updateUI() {

@@ -24,6 +24,9 @@ class UserRepository: UserRepositoryProtocol {
     }
     
     func getUserDetail(name: String) -> Single<User> {
+        if AppEnvironment.current == .DEV {
+            return returnMockUserDetail()
+        }
         return apiRepository.request(endPoint: UserEndpoint.getUser(name: name))
     }
     
@@ -80,6 +83,19 @@ extension UserRepository {
                 let data = try JsonLoader.loadJSON(from: "Users") // returns Data
                 let users = try JSONDecoder().decode(Users.self, from: data)
                 single(.success(users))
+            } catch {
+                single(.failure(APIError.unexpectedResponse))
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func returnMockUserDetail() -> Single<User> {
+        return Single.create { single in
+            do  {
+                let data = try JsonLoader.loadJSON(from: "UserDetail")
+                let userDetail = try JSONDecoder().decode(User.self, from: data)
+                single(.success(userDetail))
             } catch {
                 single(.failure(APIError.unexpectedResponse))
             }
